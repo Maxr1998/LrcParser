@@ -47,6 +47,7 @@ public class LrcStartTimeUtils
         int minutes = int.Parse(match.Groups[1].Value);
         int seconds = int.Parse(match.Groups[2].Value);
         int hundredths = int.Parse(match.Groups[3].Value);
+        hundredths = (hundredths < 100) ? hundredths : (hundredths / 10);
 
         return minutes * 60 * 1000 + seconds * 1000 + hundredths * 10;
     }

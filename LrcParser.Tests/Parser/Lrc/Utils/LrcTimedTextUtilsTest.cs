@@ -42,6 +42,7 @@ public class LrcTimedTextUtilsTest
     [TestCase("<01:00.00>", 60000)]
     [TestCase("<10:00.00>", 600000)]
     [TestCase("<100:00.00>", 6000000)]
+    [TestCase("<12:34.567>", 754560)]
     [TestCase("<0:00.00>", 0)] // prevent throw error in some invalid format.
     [TestCase("<0:0.0>", 0)] // prevent throw error in some invalid format.
     [TestCase("<1:00.00><1:02.00>", 60000)] // rarely to get this case, so return the first one.
