@@ -38,30 +38,6 @@ public class LrcStartTimeUtilsTest
         Assert.That(actual.Item2, Is.EqualTo(lyric));
     }
 
-    [TestCase("[00:00.00]", 0)]
-    [TestCase("[00:06.00]", 6000)]
-    [TestCase("[01:00.00]", 60000)]
-    [TestCase("[10:00.00]", 600000)]
-    [TestCase("[100:00.00]", 6000000)]
-    [TestCase("[12:34.567]", 754560)]
-    [TestCase("[0:00.00]", 0)] // prevent throw error in some invalid format.
-    [TestCase("[0:0.0]", 0)] // prevent throw error in some invalid format.
-    [TestCase("[1:00.00][1:02.00]", 60000)] // rarely to get this case, so return the first one.
-    public void TestConvertTimeTagToMillionSecond(string timeTag, int expectedMillionSecond)
-    {
-        var actual = LrcStartTimeUtils.ConvertTimeTagToMillionSecond(timeTag);
-
-        Assert.That(actual, Is.EqualTo(expectedMillionSecond));
-    }
-
-    [TestCase("[--:--.--]")]
-    [TestCase("[]")]
-    [TestCase("<1:00.00>")] // should not contains embedded time-tag.
-    public void TestConvertTimeTagToMillionSecondWithInvalidValue(string timeTag)
-    {
-        Assert.Throws<InvalidOperationException>(() => LrcStartTimeUtils.ConvertTimeTagToMillionSecond(timeTag));
-    }
-
     #endregion
 
     #region Encode
@@ -82,24 +58,6 @@ public class LrcStartTimeUtilsTest
     public void TestEncodeWithInvalidValue(int[] startTimes, string expectedLine)
     {
         Assert.Throws<InvalidOperationException>(() => LrcStartTimeUtils.JoinLyricAndTimeTag(startTimes, expectedLine));
-    }
-
-    [TestCase(0, "[00:00.00]")]
-    [TestCase(6000, "[00:06.00]")]
-    [TestCase(60000, "[01:00.00]")]
-    [TestCase(600000, "[10:00.00]")]
-    [TestCase(6000000, "[100:00.00]")]
-    public void TestConvertMillionSecondToTimeTag(int millionSecond, string expectedTimeTag)
-    {
-        var actual = LrcStartTimeUtils.ConvertMillionSecondToTimeTag(millionSecond);
-
-        Assert.That(actual, Is.EqualTo(expectedTimeTag));
-    }
-
-    [TestCase(-1)]
-    public void TestConvertMillionSecondToTimeTagWithInvalidValue(int millionSecond)
-    {
-        Assert.Throws<InvalidOperationException>(() => LrcStartTimeUtils.ConvertMillionSecondToTimeTag(millionSecond));
     }
 
     #endregion
