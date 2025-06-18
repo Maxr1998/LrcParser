@@ -23,7 +23,7 @@ internal static class TimeTagUtils
         {
             TimeTagMode.LineTimeTag => LINE_TIME_TAG_REGEX,
             TimeTagMode.WordTimeTag => WORD_TIME_TAG_REGEX,
-            _ => throw new ArgumentOutOfRangeException(nameof(mode), mode, null)
+            _ => throw new ArgumentOutOfRangeException(nameof(mode), mode, null),
         };
 
         Match match = regex.Match(timeTag);
@@ -68,7 +68,7 @@ internal static class TimeTagUtils
         {
             TimeTagMode.LineTimeTag => $"[{minutes:D2}:{seconds:D2}.{hundredths:D2}]",
             TimeTagMode.WordTimeTag => $"<{minutes:D2}:{seconds:D2}.{hundredths:D2}>",
-            _ => throw new ArgumentOutOfRangeException(nameof(mode), mode, null)
+            _ => throw new ArgumentOutOfRangeException(nameof(mode), mode, null),
         };
     }
 }
