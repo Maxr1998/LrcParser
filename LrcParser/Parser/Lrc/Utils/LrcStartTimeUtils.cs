@@ -9,6 +9,19 @@ namespace LrcParser.Parser.Lrc.Utils;
 public static class LrcStartTimeUtils
 {
     /// <summary>
+    /// Check if the line starts with a line time tag.
+    /// </summary>
+    /// <param name="line">The lyrics line in the LRC format.</param>
+    /// <returns>
+    /// <c>true</c> if the line starts with a line time tag, <c>false</c> otherwise.
+    /// </returns>
+    public static bool StartsWithLineTimeTag(string line)
+    {
+        var match = TimeTagUtils.LINE_TIME_TAG_REGEX.Match(line);
+        return match.Success && match.Index == 0;
+    }
+
+    /// <summary>
     /// Split an LRC lyrics line into parsed line time tags and the lyric text.
     /// </summary>
     /// <param name="line">The lyrics line in the LRC format.</param>
