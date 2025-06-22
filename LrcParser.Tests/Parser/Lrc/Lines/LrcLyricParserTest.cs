@@ -12,9 +12,9 @@ namespace LrcParser.Tests.Parser.Lrc.Lines;
 
 public class LrcLyricParserTest : BaseSingleLineParserTest<LrcLyricParser, LrcLyric>
 {
-    [TestCase("[00:17:97]帰[00:18:37]り[00:18:55]道[00:18:94]は[00:19:22]", true)]
-    [TestCase("[00:17:97]<00:00.00>帰<00:00.00>り<00:00.00>道<00:00.00>は<00:00.00>", true)]
-    [TestCase("karaoke", true)] // depends on the config, might be parsed but no time, or being ignored.
+    [TestCase("[00:17.97]帰[00:18.37]り[00:18.55]道[00:18.94]は[00:19.22]", true)]
+    [TestCase("[00:17.97]<00:00.00>帰<00:00.00>り<00:00.00>道<00:00.00>は<00:00.00>", true)]
+    [TestCase("karaoke", true)]
     [TestCase("", false)]
     [TestCase(null, false)]
     public void TestCanDecode(string text, bool expected)
