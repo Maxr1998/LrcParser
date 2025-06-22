@@ -14,7 +14,9 @@ public class LrcLyricParserTest : BaseSingleLineParserTest<LrcLyricParser, LrcLy
 {
     [TestCase("[00:17.97]帰[00:18.37]り[00:18.55]道[00:18.94]は[00:19.22]", true)]
     [TestCase("[00:17.97]<00:00.00>帰<00:00.00>り<00:00.00>道<00:00.00>は<00:00.00>", true)]
-    [TestCase("karaoke", true)]
+    [TestCase("[00:17.97]", true)] // only start time-tag can be decode.
+    [TestCase("[00:17:97]", true)] // invalid time-tag might be decoded as lyric string with no time-tag info.
+    [TestCase("karaoke", true)] // string might be parsed into lyric without any time info for now.
     [TestCase("", false)]
     [TestCase(null, false)]
     public void TestCanDecode(string text, bool expected)
