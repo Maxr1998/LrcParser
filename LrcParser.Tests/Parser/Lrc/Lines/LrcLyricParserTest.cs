@@ -105,6 +105,17 @@ public class LrcLyricParserTest : BaseSingleLineParserTest<LrcLyricParser, LrcLy
                 TimeTags = [],
             },
         ],
+        // Don't parse word time tags if multiple line time tags are found, as this is unsupported by LRC.
+        // Instead, return the unparsed line without the line time and no word time tags.
+        [
+            "[00:17.00][00:18.00] <00:00.00>帰<00:01.00>り<00:02.00>道<00:03.00>は",
+            new LrcLyric
+            {
+                Text = "<00:00.00>帰<00:01.00>り<00:02.00>道<00:03.00>は",
+                StartTimes = [17000, 18000],
+                TimeTags = [],
+            },
+        ],
     };
 
     [TestCaseSource(nameof(testEncodeSource))]
